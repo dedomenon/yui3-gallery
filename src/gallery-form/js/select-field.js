@@ -59,8 +59,10 @@ Y.extend(SelectField, Y.ChoiceField, {
 		// Create the "Choose one" option
 		elOption = Y.Node.create(SelectField.OPTION_TEMPLATE);
 		this._fieldNode.appendChild(elOption);
+                Y.log("Adding Choose One option node ");
 
 		Y.Array.each(choices, function (c, i, a) {
+                        Y.log("Adding option node " + i);
 			elOption = Y.Node.create(SelectField.OPTION_TEMPLATE);
             this._fieldNode.appendChild(elOption);
         }, this);
@@ -92,6 +94,7 @@ Y.extend(SelectField, Y.ChoiceField, {
 		options.each(function(node, index, nodeList) {
 			var label = (index === 0 ? 'Choose one' : choices[index - 1].label),
 				val = (index === 0 ? '' : choices[index - 1].value);
+                        Y.log("Setting option "+ index +" attributes label "+label+" and value "+ val);
 
 			node.setAttrs({
 				innerHTML : label,

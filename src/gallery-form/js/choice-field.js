@@ -47,6 +47,7 @@ Y.extend(ChoiceField, Y.FormField, {
      */
     _validateChoices : function (val) {
         if (!Y.Lang.isArray(val)) {
+            Y.log("Rejecting choices as choices passed are not in an array");
             return false;
         }
 		
@@ -54,6 +55,7 @@ Y.extend(ChoiceField, Y.FormField, {
 
 		Y.Array.each(val, function(c, i, a) {
             if (!Y.Lang.isObject(c)) {
+                Y.log("Rejecting choices as not all items are objects");
                 valid = false;
 				return;
             }
@@ -61,6 +63,7 @@ Y.extend(ChoiceField, Y.FormField, {
                 !Y.Lang.isString(c.label) ||
                 !c.value ||
                 !Y.Lang.isString(c.value)) {
+                                        Y.log("Rejecting choices as not all items sting labels and values");
 					valid = false;
 					return;
             }
