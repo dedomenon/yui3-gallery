@@ -87,6 +87,11 @@ Y.mix(Form, {
 			value : false,
 			validator : Y.Lang.isBoolean
 		},
+		/**
+		 * @attribute resetAfterSubmit
+		 * @type Boolean
+		 * @description Set to true to automatically reset form after successful submit
+		 */
                 resetAfterSubmit : {
 			value : true,
 			validator : Y.Lang.isBoolean
