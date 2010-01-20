@@ -86,7 +86,11 @@ Y.mix(Form, {
 		inlineValidation : {
 			value : false,
 			validator : Y.Lang.isBoolean
-		}
+		},
+                resetAfterSubmit : {
+			value : true,
+			validator : Y.Lang.isBoolean
+                }
 	},
 
 	/**
@@ -514,7 +518,9 @@ Y.extend(Form, Y.Widget, {
 		}, this));
 
 		this.after('success', Y.bind(function(e) {
-			this.reset();
+			if (this.get('resetAfterSubmit')) {
+                          this.reset();
+                        }
 		}, this));
 
 		Y.on('io:success', Y.bind(this._handleIOSuccess, this));
