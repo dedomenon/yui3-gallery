@@ -589,14 +589,15 @@ Y.extend(FormField, Y.Widget, {
 	 * @description Clears the value of this field
 	 */
 	 clear : function () {
-		this.set('value', '');
-		this._fieldNode.set('value', '');
+		this.set('value', this.init_value);
+		this._fieldNode.set('value', this.init_value);
 	},
 
 	initializer : function () {
 		this.publish('blur');
 		this.publish('change');
 		this.publish('focus');
+                this.init_value = this.get('value');
 	},
 
 	destructor : function (config) {
