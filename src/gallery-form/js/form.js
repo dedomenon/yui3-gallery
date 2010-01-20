@@ -95,6 +95,15 @@ Y.mix(Form, {
                 resetAfterSubmit : {
 			value : true,
 			validator : Y.Lang.isBoolean
+		},
+		/**
+		 * @attribute resetAfterSubmit
+		 * @type Boolean
+		 * @description Set to true to skip automatic validation of field values before submitting the form
+		 */
+                skipValidationBeforeSubmit : {
+			value : false,
+			validator : Y.Lang.isBoolean
                 }
 	},
 
@@ -445,7 +454,7 @@ Y.extend(Form, Y.Widget, {
 	 * @description Submits the form using the defined method to the URL defined in the action
 	 */
 	submit : function () {
-		if (this._runValidation()) {
+		if ( this.get("skipValidationBeforeSubmit") || this._runValidation()) {
 			var formAction = this.get('action'),
 				formMethod = this.get('method'),
 				fields = this.get('fields'), 
