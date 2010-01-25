@@ -457,25 +457,21 @@ Y.extend(Form, Y.Widget, {
 		if ( this.get("skipValidationBeforeSubmit") || this._runValidation()) {
 			var formAction = this.get('action'),
 				formMethod = this.get('method'),
-				fields = this.get('fields'), 
-				postData = '', 
 				transaction, cfg;
 
-			Y.Array.each(fields, function (f, i, a) {
-				if (f.get('name') !== null) {
-					postData += encodeURIComponent(f.get('name')) + '=' +
-								(encodeURIComponent(f.get('value')) || '') + '&';
-				}
-			});
 
-			cfg = {
-				method : formMethod,
-				data : postData
-			};
+                        cfg = { method: formMethod,
+                                    form: { id: this._formNode,
+                                            useDisabled: true
+                                          }
+                                  };
 
 			transaction = Y.io(formAction, cfg);
 
 			this._ioIds[transaction.id] = transaction;
+
+
+
 		}
 	},
 	
