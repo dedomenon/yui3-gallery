@@ -438,6 +438,20 @@ Y.extend(Form, Y.Widget, {
 	},
 
 	/**
+	 * @method _handleIOComplete
+	 * @protected
+	 * @param {Number} ioId
+	 * @param {Object} ioResponse
+	 * @description Handles the complete event of IO transactions instantiated by this instance
+	 */
+	_handleIOComplete : function (ioId, ioResponse) {
+                Y.log("Handling IO complete for transaction id "+ioId);
+		if (typeof this._ioIds[ioId] != 'undefined') {
+			delete this._ioIds[ioId];
+			this.fire('complete', {response : ioResponse});
+		}
+	},
+	/**
 	 * @method _handleIOFailure
 	 * @protected
 	 * @param {Number} ioId
@@ -519,6 +533,7 @@ Y.extend(Form, Y.Widget, {
 		this.publish('submit');
 		this.publish('reset');
 		this.publish('success');
+		this.publish('complete');
 		this.publish('failure');
 	},
 	
@@ -551,6 +566,7 @@ Y.extend(Form, Y.Widget, {
 		}, this));
 
 		Y.on('io:success', Y.bind(this._handleIOSuccess, this));
+		Y.on('io:complete', Y.bind(this._handleIOComplete, this));
 		Y.on('io:failure', Y.bind(this._handleIOFailure, this));
 	},
 	
