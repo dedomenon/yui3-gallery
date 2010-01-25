@@ -430,6 +430,7 @@ Y.extend(Form, Y.Widget, {
 	 * @description Handles the success event of IO transactions instantiated by this instance
 	 */
 	_handleIOSuccess : function (ioId, ioResponse) {
+                Y.log("Handling IO success for transaction id "+ioId);
 		if (typeof this._ioIds[ioId] != 'undefined') {
 			delete this._ioIds[ioId];
 			this.fire('success', {response : ioResponse});
@@ -444,6 +445,7 @@ Y.extend(Form, Y.Widget, {
 	 * @description Handles the failure event of the IO transactions instantiated by this instance
 	 */
 	_handleIOFailure : function (ioId, ioResponse) {
+                Y.log("Handling IO failure for transaction id "+ioId);
 		if (typeof this._ioIds[ioId] != 'undefined') {
 			this.fire('failure', {response : ioResponse});
 			delete this._ioIds[ioId];
@@ -481,6 +483,7 @@ Y.extend(Form, Y.Widget, {
                                   };
 
 			transaction = Y.io(formAction, cfg);
+                        Y.log('Created IO transaction id ' + transaction.id);
 
 			this._ioIds[transaction.id] = transaction;
 
