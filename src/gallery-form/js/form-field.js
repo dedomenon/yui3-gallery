@@ -591,12 +591,14 @@ Y.extend(FormField, Y.Widget, {
 	 clear : function () {
 		this.set('value', this.init_value);
 		this._fieldNode.set('value', this.init_value);
+                this.fire('clear', this);
 	},
 
 	initializer : function () {
 		this.publish('blur');
 		this.publish('change');
 		this.publish('focus');
+		this.publish('clear');
                 this.init_value = this.get('value');
 	},
 
