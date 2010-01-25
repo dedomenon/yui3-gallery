@@ -104,7 +104,17 @@ Y.mix(Form, {
                 skipValidationBeforeSubmit : {
 			value : false,
 			validator : Y.Lang.isBoolean
+                },
+		/**
+		 * @attribute upload
+		 * @type Boolean
+		 * @description Set to true if form is used to upload files and needs to be multipart
+		 */
+                upload : {
+			value : false,
+			validator : Y.Lang.isBoolean
                 }
+
 	},
 
 	/**
@@ -344,6 +354,9 @@ Y.extend(Form, Y.Widget, {
 
 		if (!form) {
 			form = Y.Node.create(Form.FORM_TEMPLATE);
+                        if (this.get("upload")) {
+                          form.setAttribute("enctype","multipart/form-data");
+                        }
 			contentBox.appendChild(form);
 		}
 		
@@ -462,6 +475,7 @@ Y.extend(Form, Y.Widget, {
 
                         cfg = { method: formMethod,
                                     form: { id: this._formNode,
+                                            upload: this.get("upload"),
                                             useDisabled: true
                                           }
                                   };
