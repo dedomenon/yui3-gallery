@@ -447,7 +447,10 @@ Y.extend(Form, Y.Widget, {
 	_handleIOComplete : function (ioId, ioResponse) {
                 Y.log("Handling IO complete for transaction id "+ioId);
 		if (typeof this._ioIds[ioId] != 'undefined') {
-			delete this._ioIds[ioId];
+                        // only delete if id if this form is multipart, so the success event will still be handled
+			if (this.get('upload')) {
+                          delete this._ioIds[ioId];
+                        }
 			this.fire('complete', {response : ioResponse});
 		}
 	},
