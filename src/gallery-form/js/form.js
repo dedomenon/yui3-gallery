@@ -159,7 +159,14 @@ Y.extend(Form, Y.Widget, {
 	 * @description An object who's keys represent the IO request ids sent by this Y.Form instance
 	 */
 	_ioIds : null,
+	/**
+	 * @property _firstField
+	 * @type Object
+	 * @protected
+	 * @description The first visible field of the form, to be used to focus first element
+	 */
 	
+        _firstField: null,
 	/**
 	 * @method _validateAction
 	 * @private
@@ -244,7 +251,17 @@ Y.extend(Form, Y.Widget, {
 				}
 				
 				fields[i] = new fieldType(f);
-			}
+                                if (f.type!='hidden' && this._firstField===null){
+                                  this._firstField = fields[i]; 
+                                  Y.log('setting firstfield from spec: ' + fields[i] );
+                                }
+			} else {
+
+                                if (f._nodeType!='hidden' && this._firstField===null){
+                                  Y.log('setting firstfield from object: ' + f );
+                                  this._firstField = f; 
+                                }
+                        }
 		}, this);
 		return fields;
 	},
