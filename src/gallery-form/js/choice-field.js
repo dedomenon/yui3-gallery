@@ -72,15 +72,6 @@ Y.extend(ChoiceField, Y.FormField, {
         return valid;
     },
 
-    _renderLabelNode : function () {
-        var contentBox = this.get('contentBox'),
-            titleNode = Y.Node.create('<span>' + this.get('label') + '</span>');
-        
-        contentBox.appendChild(titleNode);
-        
-        this._labelNode = titleNode;
-    },
-    
     _renderFieldNode : function () {
         var contentBox = this.get('contentBox'),
             choices = this.get('choices'),
