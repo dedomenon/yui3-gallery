@@ -265,6 +265,15 @@ Y.extend(Form, Y.Widget, {
 		}, this);
 		return fields;
 	},
+	/**
+	 * @method focus
+	 * @public
+	 * @param 
+	 * @description Sets focus on first field of form
+	 */
+         focus : function(){
+           this._firstField._fieldNode.focus();
+         },
 
 	/**
 	 * @method _parseAction
